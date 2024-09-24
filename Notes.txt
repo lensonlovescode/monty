@@ -1,0 +1,24 @@
+Learning Objectives Summary:
+
+1. LIFO and FIFO:
+LIFO (Last In, First Out): The last element added is the first one removed (e.g., stack).
+FIFO (First In, First Out): The first element added is the first one removed (e.g., queue).
+
+2. Stack and When to Use It:
+Stack: A data structure following LIFO order.
+When to Use: Ideal for tasks requiring "reverse" operations like recursion, expression evaluation, and function call management.
+
+3. Queue and When to Use It:
+Queue: A data structure following FIFO order.
+When to Use: Suitable for tasks requiring sequential processing, such as task scheduling, buffering, or managing requests.
+
+4. Common Implementations of Stacks and Queues:
+Stack Implementations: Using arrays or linked lists.
+Queue Implementations: Also implemented using arrays or linked lists, with special attention to pointers for front and rear elements.
+
+5. Common Use Cases:
+Stacks: Expression parsing, undo/redo functionality, backtracking (e.g., mazes).
+Queues: Printer task scheduling, breadth-first search (BFS), buffering in I/O.
+
+6. Proper Use of Global Variables:
+Guidelines: Use global variables sparingly. They can lead to harder-to-maintain code due to potential side effects across the program. Ensure they are only used when data needs to be shared across multiple functions or modules, and always use clear naming to avoid confusion.
