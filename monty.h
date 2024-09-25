@@ -1,6 +1,11 @@
 #ifndef MONTY_H
 #define MONTY_H
-
+#include <stdlib.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#define MAX_LEN 1024
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
