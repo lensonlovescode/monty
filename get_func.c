@@ -6,29 +6,21 @@
  */
 int get_func(char **tokens)
 {
-	instruction_t instruction_struct[] = {
-		{"push", push_to_stack},
-		{"pall", print_all}
-	};
-	int j;
-	int argument;
+	instruction_t instruction_struct[] = { {"push", push_to_stack},
+	{"pall", print_all}, {"pint", print_top}, {"pop", pop_from_stack},
+	{"swap", swap_top_two}, {"add", add_top_two}, {"nop", do_nothing} };
+	int j, argument, idx;
 	char *opcode;
-	int idx;
 	stack_t *stack;
 
 	idx = 0;
 	stack = NULL;
-
 	while (tokens[idx] != NULL)
 	{
 		j = 0;
 		opcode = get_opcode(tokens[idx]);
-		if (opcode == NULL)
-		{
-			printf("Error: malloc failed\n");
-			exit(EXIT_FAILURE);
-		}
-		while (j < 2)
+		check_for_null(opcode);
+		while (j < 7)
 		{
 			if (strcmp(instruction_struct[j].opcode, opcode) == 0)
 			{
@@ -43,20 +35,13 @@ int get_func(char **tokens)
 					instruction_struct[j].f(&stack, argument);
 				}
 				else
-				{
 					instruction_struct[j].f(&stack, idx + 1);
-				}
 				free(opcode);
 				break;
 			}
 			j++;
 		}
-		if (j == 2)
-		{
-			printf("L%d: unknown instruction %s\n", idx + 1, opcode);
-			free(opcode);
-			exit(EXIT_FAILURE);
-		}
+		check_seven(j, opcode, idx);
 		idx++;
 	}
 	return (1);
@@ -117,4 +102,36 @@ int get_argument(char *str)
 
 	return (num);
 }
-
+/**
+ * check_seven - checks if j is 7
+ * @j: just j :)
+ * @opcode: the opcode to be freed
+ * @idx: index or line number for errors
+ * Return: nothing
+ */
+void check_seven(int j, char *opcode, int idx)
+{
+	if (j == 7)
+	{
+		printf("L%d: unknown instruction %s\n", idx + 1, opcode);
+		free(opcode);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		return;
+	}
+}
+/**
+ * check_for_null - checks for null string
+ * @opcode: opcode strring to be checked
+ * Return: nothing
+ */
+void check_for_null(char *opcode)
+{
+	if (opcode == NULL)
+	{
+		printf("Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+}

@@ -17,7 +17,7 @@ char **tokenize(char *buffer, char *delim)
 	if (tokens == NULL)
 	{
 		perror("malloc failed");
-		return NULL;
+		return (NULL);
 	}
 
 	token = strtok(buffer, delim);
@@ -90,10 +90,14 @@ char *reduce_spaces(char *str)
 char *trim_whitespace(char *str)
 {
 	char *end;
-	while (isspace((unsigned char)*str)) str++;
+
+	while (isspace((unsigned char)*str))
+	{
+		str++;
+	}
 	if (*str == 0)
 	{
-		return str;
+		return (str);
 	}
 	end = str + strlen(str) - 1;
 
@@ -101,7 +105,7 @@ char *trim_whitespace(char *str)
 	{
 		end--;
 	}
-	*(end+1) = '\0';
+	*(end + 1) = '\0';
 
 	return (str);
 }
