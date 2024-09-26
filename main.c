@@ -10,6 +10,8 @@ int main(int argc, char *argv[])
 	int file_descriptor;
 	int bytes_read;
 	void *buffer;
+	char **tokens;
+	int i;
 
 	if (argc != 2)
 	{
@@ -44,8 +46,23 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	printf("FILE CONTENTS:\n\n%s\n", buffer);
+	tokens = tokenize(buffer, "\n\t");
+	if (tokens == NULL)
+	{
+		printf("Error in tokenization");
+		free(buffer);
+		close(file_descriptor);
+		exit(EXIT_FAILURE);
+	}
+
+	while (tokens[i] != NULL)
+	{
+		get_func(tokens);
+		i++;
+	}
+
 	free(buffer);
+	free_tokens(tokens);
 	close(file_descriptor);
 
 	return (0);
